@@ -1,0 +1,33 @@
+.register__main {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__form {
+  min-height: 40%;
+  max-width: 500px;
+  min-width: 400px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 4em;
+
+  input {
+    height: 3em;
+    margin-bottom: 3em;
+    border: none;
+    border-bottom: 1px black solid;
+
+    &:focus {
+      border-bottom: 2px black solid;
+      outline: none;
+    }
+  }
+
+  button {
+    height: 3em;
+  }
+}
