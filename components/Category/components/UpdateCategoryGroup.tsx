@@ -12,9 +12,18 @@ const UpdateCategoryGroup = ({ category }: { category: ICategory }) => {
   const queryClient = useQueryClient();
   const updateCategoryMutation = useUpdateCategory(queryClient);
   const deleteCategoryMutation = useDeleteCategory(queryClient);
+  const [newCategoryValue, setNewCategoryValue] = React.useState(
+    category.value
+  );
 
   return (
-    <div>
+    <div
+      className="inline-block border-2 border-solid px-2 py"
+      style={{
+        background: isUpdateCategory ? "" : category.color,
+        borderColor: isUpdateCategory ? category.color : "",
+      }}
+    >
       {isUpdateCategory ? (
         <>
           <input
@@ -22,15 +31,15 @@ const UpdateCategoryGroup = ({ category }: { category: ICategory }) => {
             type="text"
             placeholder="edit category"
             ref={updateCategoryInputRef}
+            value={newCategoryValue}
+            onChange={(e) => setNewCategoryValue(e.target.value)}
           ></input>
           <button
             onClick={async () => {
-              if (updateCategoryInputRef.current) {
-                updateCategoryMutation.mutate({
-                  categoryId: category.id,
-                  newCategory: updateCategoryInputRef.current.value,
-                });
-              }
+              updateCategoryMutation.mutate({
+                categoryId: category.id,
+                newCategory: newCategoryValue,
+              });
               setIsUpdateCategory(!isUpdateCategory);
             }}
           >
@@ -38,7 +47,7 @@ const UpdateCategoryGroup = ({ category }: { category: ICategory }) => {
           </button>
         </>
       ) : (
-        category.value
+        <div className="inline-block">{category.value}</div>
       )}
       <button
         className="ml-3 hover:bg-black hover:text-white"

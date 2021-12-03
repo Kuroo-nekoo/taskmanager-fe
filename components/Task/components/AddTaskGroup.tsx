@@ -12,15 +12,19 @@ const AddTaskGroup = ({ categoryId }: { categoryId: number }) => {
   return (
     <>
       {isAddTask ? (
-        <div className="w-full border-2 border-black border-solid h-11 my-0.5 px-3 flex items-center">
+        <div className="w-full border border-black border-solid h-11 my-0.5 px-3 flex items-center">
           <input
             type="text"
             placeholder="enter task value here"
             ref={addTaskInputRef}
+            autoFocus
           ></input>
           <button
             onClick={() => {
-              if (addTaskInputRef.current) {
+              if (
+                addTaskInputRef.current &&
+                addTaskInputRef.current.value !== ""
+              ) {
                 addTaskMutation.mutate({
                   value: addTaskInputRef.current.value,
                   categoryId,
@@ -35,12 +39,7 @@ const AddTaskGroup = ({ categoryId }: { categoryId: number }) => {
           </button>
         </div>
       ) : (
-        <button
-          className="hover:bg-black hover:text-white"
-          onClick={() => setIsAddTask(!isAddTask)}
-        >
-          new task +
-        </button>
+        <button onClick={() => setIsAddTask(!isAddTask)}>new task +</button>
       )}
     </>
   );
