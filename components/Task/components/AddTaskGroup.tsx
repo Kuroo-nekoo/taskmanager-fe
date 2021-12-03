@@ -12,7 +12,7 @@ const AddTaskGroup = ({ categoryId }: { categoryId: number }) => {
   return (
     <>
       {isAddTask ? (
-        <div>
+        <div className="w-full border-2 border-black border-solid h-11 my-0.5 px-3 flex items-center">
           <input
             type="text"
             placeholder="enter task value here"
@@ -30,9 +30,17 @@ const AddTaskGroup = ({ categoryId }: { categoryId: number }) => {
           >
             add
           </button>
+          <button className="ml-auto" onClick={() => setIsAddTask(!isAddTask)}>
+            cancel
+          </button>
         </div>
       ) : (
-        <button onClick={() => setIsAddTask(!isAddTask)}>new task +</button>
+        <button
+          className="hover:bg-black hover:text-white"
+          onClick={() => setIsAddTask(!isAddTask)}
+        >
+          new task +
+        </button>
       )}
     </>
   );
