@@ -21,7 +21,7 @@ a {
 
 @layer base {
   button {
-    @apply hover:bg-black hover:text-white;
+    @apply hover:bg-gray-400 text-gray-500;
   }
 
   input {

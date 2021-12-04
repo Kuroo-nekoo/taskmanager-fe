@@ -3,10 +3,12 @@ import { ICategory } from "../../../intefaces/category";
 import { ITask } from "../../../intefaces/task";
 import useDeleteTask from "../hooks/useDeleteTask";
 import * as React from "react";
+import TaskCategoryChanger from "./TaskCategoryChanger";
 
 const TaskListItem = ({ task }: { task: ITask }) => {
   const queryClient = useQueryClient();
   const [isChangeTaskCategory, setIsChangeTaskCategory] = React.useState(false);
+  const [isEditTaskValue, setIsEditTaskValue] = React.useState(false);
 
   const deleteTaskMutation = useDeleteTask(queryClient);
   const categories = queryClient.getQueryData<ICategory[]>("categories");
@@ -15,19 +17,43 @@ const TaskListItem = ({ task }: { task: ITask }) => {
   );
 
   return (
-    <div className="border border-black border-solid h-11 my-0.5 px-3 flex items-center">
+    <div className="border border-gray-400 border-solid h-11 my-0.5 px-3 flex items-center">
       <div
         className="w-2 h-2 mr-3"
         style={{ background: category && category.color }}
-        onClick={() => {}}
-      ></div>
-      <div>{task.value}</div>
-      <button
-        className="ml-auto hover:bg-black hover:text-white"
-        onClick={() => deleteTaskMutation.mutate(task.id)}
+        onClick={() => {
+          setIsChangeTaskCategory(!isChangeTaskCategory);
+        }}
       >
-        delete
-      </button>
+        {isChangeTaskCategory && (
+          <TaskCategoryChanger
+            taskId={task.id}
+            setIsChangeTaskCategory={setIsChangeTaskCategory}
+          ></TaskCategoryChanger>
+        )}
+      </div>
+      <div>{task.value}</div>
+      {isEditTaskValue ? (
+        <div className="ml-auto">
+          <button onClick={() => setIsEditTaskValue(true)}>save</button>
+          <button
+            className="ml-2"
+            onClick={() => deleteTaskMutation.mutate(task.id)}
+          >
+            cancel
+          </button>
+        </div>
+      ) : (
+        <div className="ml-auto">
+          <button onClick={() => setIsEditTaskValue(true)}>edit</button>
+          <button
+            className="ml-2"
+            onClick={() => deleteTaskMutation.mutate(task.id)}
+          >
+            delete
+          </button>
+        </div>
+      )}
     </div>
   );
 };

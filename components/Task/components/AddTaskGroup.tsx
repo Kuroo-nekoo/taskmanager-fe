@@ -10,7 +10,7 @@ const AddTaskGroup = ({ categoryId }: { categoryId: number }) => {
   const addTaskMutation = useAddTask(queryClient);
 
   return (
-    <>
+    <div className="block">
       {isAddTask ? (
         <div className="w-full border border-black border-solid h-11 my-0.5 px-3 flex items-center">
           <input
@@ -41,7 +41,7 @@ const AddTaskGroup = ({ categoryId }: { categoryId: number }) => {
       ) : (
         <button onClick={() => setIsAddTask(!isAddTask)}>new task +</button>
       )}
-    </>
+    </div>
   );
 };
 

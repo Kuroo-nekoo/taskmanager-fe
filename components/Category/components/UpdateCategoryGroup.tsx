@@ -50,13 +50,13 @@ const UpdateCategoryGroup = ({ category }: { category: ICategory }) => {
         <div className="inline-block">{category.value}</div>
       )}
       <button
-        className="ml-3 hover:bg-black hover:text-white"
+        className="ml-3"
         onClick={() => setIsUpdateCategory(!isUpdateCategory)}
       >
         {isUpdateCategory ? "cancel" : "edit"}
       </button>
       <button
-        className="ml-3 hover:bg-black hover:text-white"
+        className="ml-3"
         onClick={() => deleteCategoryMutation.mutate(category.id)}
       >
         delete

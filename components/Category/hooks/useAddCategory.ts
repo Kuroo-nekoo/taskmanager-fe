@@ -2,13 +2,18 @@ import axios from "axios";
 import { QueryClient, useMutation } from "react-query";
 import { ITask } from "../../../intefaces/task";
 
+interface IAddCategoryParams {
+  value: string;
+  color: string;
+}
+
 export default function useAddCategory(queryClient: QueryClient) {
   const categoryUrl = "http://localhost:4000/categories";
 
-  return useMutation<ITask, Error, string>(
-    async (newCategory: string) => {
+  return useMutation<ITask, Error, IAddCategoryParams>(
+    async ({ value, color }: IAddCategoryParams) => {
       try {
-        const res = await axios.post(categoryUrl, { value: newCategory });
+        const res = await axios.post(categoryUrl, { value, color });
         return res;
       } catch (err) {
         console.error(err);
