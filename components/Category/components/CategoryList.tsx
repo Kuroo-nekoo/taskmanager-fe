@@ -1,10 +1,10 @@
 import TaskListItem from "../../Task/components/TaskListItem";
 import AddTaskGroup from "../../Task/components/AddTaskGroup";
-import useCategory from "../hooks/useCategory";
 import UpdateCategoryGroup from "../components/UpdateCategoryGroup";
+import useCategories from "../hooks/useCategory";
 
 const CategoryList = () => {
-  const categoryQuery = useCategory();
+  const categoryQuery = useCategories();
 
   return (
     <div>

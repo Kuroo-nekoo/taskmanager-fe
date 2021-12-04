@@ -30,6 +30,7 @@ const EditTaskValueGroup = ({
               id: task.id,
               value: updateTaskValue,
             });
+            setIsEditTaskValue(false);
           }}
         >
           save

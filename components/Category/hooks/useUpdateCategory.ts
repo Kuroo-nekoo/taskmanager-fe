@@ -1,7 +1,6 @@
 import axios from "axios";
 import { QueryClient, useMutation } from "react-query";
 import { ICategory } from "../../../intefaces/category";
-import { ITask } from "../../../intefaces/task";
 
 export default function useUpdateCategory(queryClient: QueryClient) {
   const categoryUrl = "http://localhost:4000/categories";
