@@ -1,67 +1,113 @@
 import * as React from "react";
 import { useQueryClient } from "react-query";
-import useAddCategory from "../../Category/hooks/useAddCategory";
-import useLists from "../../List/hooks/useLists";
-import Link from "next/link";
 import { useRouter } from "next/router";
+import AddCategoryGroup from "../../Category/components/AddCategoryGroup";
+import { ISpace } from "../../../intefaces/space";
+import useAddSpace from "../../spaces/hooks/useAddSpace";
+import useDeleteSpace from "../../spaces/hooks/useDeleteSpace";
+import { BiRightArrow, BiDownArrow } from "react-icons/bi";
 
 const Sidebar = () => {
-  const addCategoryValueInputRef = React.useRef<HTMLInputElement | null>(null);
-  const addCategoryColorInputRef = React.useRef<HTMLInputElement | null>(null);
   const queryClient = useQueryClient();
-
-  const addCategoryMutation = useAddCategory(queryClient);
-  const listQuery = useLists(queryClient);
+  const spaces = queryClient.getQueryData<ISpace[]>("spaces");
+  const addSpaceInputRef = React.useRef<HTMLInputElement | null>(null);
   const router = useRouter();
+  const [isOpenSpaceTab, setIsOpenSpaceTab] = React.useState(false);
+  const [isAddSpace, setIsAddSpace] = React.useState(false);
+
+  const addSpaceMutation = useAddSpace(queryClient);
+  const deleteSpaceMutation = useDeleteSpace(queryClient);
 
   return (
     <div className="h-screen col-span-2 border-r border-black border-solid">
-      {listQuery.isSuccess && (
-        <>
-          <input
-            type="text"
-            ref={addCategoryValueInputRef}
-            placeholder="enter category value here"
-          ></input>
-          <input
-            type="text"
-            ref={addCategoryColorInputRef}
-            placeholder="enter category value here"
-          ></input>
-          <button
-            onClick={() => {
-              if (
-                addCategoryValueInputRef.current &&
-                addCategoryColorInputRef.current
-              ) {
-                addCategoryMutation.mutate({
-                  value: addCategoryValueInputRef.current.value,
-                  color: addCategoryColorInputRef.current.value,
-                });
-              }
-            }}
-          >
-            add
-          </button>
-          <div>
-            {listQuery.data &&
-              listQuery.data.map((list) => {
-                return (
-                  <div
-                    key={list.value}
+      {spaces &&
+        spaces.map((space) => {
+          return (
+            <>
+              <button
+                className="w-full bg-gray-200 p-2 flex items-center justify-center"
+                onClick={() => {
+                  setIsOpenSpaceTab(!isOpenSpaceTab);
+                }}
+              >
+                space
+                {isOpenSpaceTab ? (
+                  <BiDownArrow
+                    style={{ display: "inline", marginLeft: "12px" }}
+                  ></BiDownArrow>
+                ) : (
+                  <BiRightArrow
+                    style={{ display: "inline", marginLeft: "12px" }}
+                  ></BiRightArrow>
+                )}
+              </button>
+              {isOpenSpaceTab ? (
+                <div key={space.id}>
+                  {isAddSpace ? (
+                    <div className="block">
+                      <input type="text" ref={addSpaceInputRef} />
+                      <button
+                        onClick={() => {
+                          if (addSpaceInputRef.current) {
+                            addSpaceMutation.mutate({
+                              value: addSpaceInputRef.current.value,
+                            });
+                          }
+                        }}
+                      >
+                        add
+                      </button>
+                      <button
+                        className="ml-3"
+                        onClick={() => {
+                          setIsAddSpace(!isAddSpace);
+                        }}
+                      >
+                        cancel
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      className="block"
+                      onClick={() => {
+                        setIsAddSpace(!isAddSpace);
+                      }}
+                    >
+                      new space +
+                    </button>
+                  )}
+                  {space.value}
+                  <button
+                    className="ml-3"
                     onClick={() => {
-                      router.push(`lists/${list.id}`, undefined, {
-                        shallow: true,
-                      });
+                      deleteSpaceMutation.mutate(space.id);
                     }}
                   >
-                    {list.value}
-                  </div>
-                );
-              })}
-          </div>
-        </>
-      )}
+                    delete
+                  </button>
+                  {space.lists &&
+                    space.lists.map((list) => {
+                      return (
+                        <div key={list.value}>
+                          <div
+                            className="inline"
+                            onClick={(e) => {
+                              // if (!router.asPath.includes("list")) {
+                              router.push(`lists/${list.id}`);
+                              // }
+                            }}
+                          >
+                            {list.value}
+                          </div>
+                          <AddCategoryGroup list={list}></AddCategoryGroup>
+                        </div>
+                      );
+                    })}
+                </div>
+              ) : null}
+            </>
+          );
+        })}
     </div>
   );
 };
