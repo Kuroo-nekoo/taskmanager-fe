@@ -20,10 +20,6 @@ a {
 @tailwind utilities;
 
 @layer base {
-  button {
-    @apply hover:bg-gray-400 text-gray-500;
-  }
-
   input {
     @apply focus:outline-none;
   }
