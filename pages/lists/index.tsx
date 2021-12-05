@@ -1,17 +1,28 @@
+import { GetServerSideProps } from "next";
 import * as React from "react";
+import { dehydrate, QueryClient } from "react-query";
 import Sidebar from "../../components/Sidebar/components/Sidebar";
-import CategoryList from "../../components/Category/components/CategoryList";
+import useSpaces, { getSpaces } from "../../components/spaces/hooks/useSpaces";
 
-const Task = () => {
+const List = () => {
+  const spaceQuery = useSpaces();
+
   return (
     <div className="w-screen h-screen grid grid-cols-12">
       <Sidebar></Sidebar>
-      <div className="px-16 py-16 w-full col-span-10">
-        <div>
-          <CategoryList></CategoryList>
-        </div>
-      </div>
     </div>
   );
 };
-export default Task;
+export default List;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery("spaces", getSpaces);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
