@@ -1,12 +1,16 @@
-import { nanoid } from "@reduxjs/toolkit";
 import axios from "axios";
 import { QueryClient, useMutation, useQueryClient } from "react-query";
 import { ITask } from "../../../intefaces/task";
 
+interface IAddTaskParams {
+  value: string;
+  categoryId: number;
+}
+
 export default function useAddTask(queryClient: QueryClient) {
   const taskUrl = "http://localhost:4000/tasks";
-  return useMutation<ITask[], Error, { value: string; categoryId: number }>(
-    async (newTaskValue: { value: string; categoryId: number }) => {
+  return useMutation<ITask[], Error, IAddTaskParams>(
+    async (newTaskValue) => {
       try {
         const res = await axios.post(taskUrl, newTaskValue);
         return res;

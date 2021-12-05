@@ -8,14 +8,15 @@ export default function useUpdateCategory(queryClient: QueryClient) {
   return useMutation<
     ICategory,
     Error,
-    { categoryId: number; newCategory: string }
+    { categoryId: number; newCategory: string; newCategoryColor: string }
   >(
-    async ({ categoryId, newCategory }) => {
+    async ({ categoryId, newCategory, newCategoryColor }) => {
       try {
         const res = await axios.patch<ICategory>(
           `${categoryUrl}/${categoryId}`,
           {
             value: newCategory,
+            color: newCategoryColor,
           }
         );
         return res.data;
