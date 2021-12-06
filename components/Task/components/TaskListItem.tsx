@@ -18,7 +18,7 @@ const TaskListItem = ({ task }: { task: ITask }) => {
   );
 
   return (
-    <div className="border border-gray-400 border-solid my-0.5 py-3 px-5 flex items-center">
+    <div className="border border-gray-400 border-solid my-0.5 py-3 px-5 flex items-center hover:bg-gray-100">
       {isEditTaskValue ? (
         <EditTaskValueGroup
           task={task}

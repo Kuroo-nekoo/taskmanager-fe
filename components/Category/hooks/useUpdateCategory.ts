@@ -5,20 +5,13 @@ import { ICategory } from "../../../intefaces/category";
 export default function useUpdateCategory(queryClient: QueryClient) {
   const categoryUrl = "http://localhost:4000/categories";
 
-  return useMutation<
-    ICategory,
-    Error,
-    { categoryId: number; newCategory: string; newCategoryColor: string }
-  >(
-    async ({ categoryId, newCategory, newCategoryColor }) => {
+  return useMutation<ICategory, Error, Partial<ICategory>>(
+    async ({ id, value, color }) => {
       try {
-        const res = await axios.patch<ICategory>(
-          `${categoryUrl}/${categoryId}`,
-          {
-            value: newCategory,
-            color: newCategoryColor,
-          }
-        );
+        const res = await axios.patch(`${categoryUrl}/${id}`, {
+          value,
+          color,
+        });
         return res.data;
       } catch (err) {
         console.error(err);

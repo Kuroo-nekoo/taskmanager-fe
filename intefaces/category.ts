@@ -5,4 +5,5 @@ export interface ICategory {
   value: string;
   color: string;
   tasks: ITask[];
+  listId: number;
 }

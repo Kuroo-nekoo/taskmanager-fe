@@ -2,18 +2,13 @@ import axios from "axios";
 import { QueryClient, useMutation, useQueryClient } from "react-query";
 import { ITask } from "../../../intefaces/task";
 
-interface IAddTaskParams {
-  value: string;
-  categoryId: number;
-}
-
 export default function useAddTask(queryClient: QueryClient) {
   const taskUrl = "http://localhost:4000/tasks";
-  return useMutation<ITask[], Error, IAddTaskParams>(
+  return useMutation<ITask[], Error, Pick<ITask, "value" | "categoryId">>(
     async (newTaskValue) => {
       try {
         const res = await axios.post(taskUrl, newTaskValue);
-        return res;
+        return res.data;
       } catch (err) {
         console.error(err);
       }

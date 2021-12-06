@@ -39,9 +39,9 @@ const CategoryGroup = ({ category }: { category: ICategory }) => {
           <button
             onClick={async () => {
               updateCategoryMutation.mutate({
-                categoryId: category.id,
-                newCategory: newCategoryValue,
-                newCategoryColor: updateCategoryColor,
+                id: category.id,
+                value: newCategoryValue,
+                color: updateCategoryColor,
               });
               setIsUpdateCategory(!isUpdateCategory);
             }}

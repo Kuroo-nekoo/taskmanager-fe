@@ -6,6 +6,7 @@ import { ISpace } from "../../../intefaces/space";
 import useAddSpace from "../../spaces/hooks/useAddSpace";
 import useDeleteSpace from "../../spaces/hooks/useDeleteSpace";
 import { BiRightArrow, BiDownArrow } from "react-icons/bi";
+import Link from "next/link";
 
 const Sidebar = () => {
   const queryClient = useQueryClient();
@@ -89,16 +90,9 @@ const Sidebar = () => {
                     space.lists.map((list) => {
                       return (
                         <div className="ml-3" key={list.value}>
-                          <div
-                            className="inline"
-                            onClick={(e) => {
-                              // if (!router.asPath.includes("list")) {
-                              router.push(`lists/${list.id}`);
-                              // }
-                            }}
-                          >
-                            {list.value}
-                          </div>
+                          <Link href={`lists/${list.id}`}>
+                            <a>{list.value}</a>
+                          </Link>
                           <AddCategoryGroup list={list}></AddCategoryGroup>
                         </div>
                       );
