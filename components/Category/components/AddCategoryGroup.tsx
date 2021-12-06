@@ -12,7 +12,7 @@ const AddCategoryGroup = ({ list }: { list: IList }) => {
   const [isAddCategory, setIsAddCategory] = React.useState(false);
 
   return (
-    <>
+    <div className="ml-3 inline">
       <button
         onClick={() => {
           setIsAddCategory(!isAddCategory);
@@ -48,7 +48,7 @@ const AddCategoryGroup = ({ list }: { list: IList }) => {
           </button>
         </>
       )}
-    </>
+    </div>
   );
 };
 

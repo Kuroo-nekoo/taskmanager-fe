@@ -2,7 +2,6 @@ import { useQueryClient } from "react-query";
 import { ICategory } from "../../../intefaces/category";
 import useUpdateTaskCategory from "../hooks/useUpdateTaskCategory";
 import * as React from "react";
-import { hasUncaughtExceptionCaptureCallback } from "process";
 
 const TaskCategoryChanger = ({
   taskId,
@@ -15,6 +14,7 @@ const TaskCategoryChanger = ({
   const categories = queryClient.getQueryData<ICategory[]>("categories");
   const updateTaskCategoryMutation = useUpdateTaskCategory(queryClient);
   const wrapperRef = React.useRef<HTMLDivElement | null>(null);
+  console.log(categories);
 
   React.useEffect(() => {
     const detectOutsideClick = (e: MouseEvent) => {

@@ -1,31 +1,27 @@
 import TaskListItem from "../../Task/components/TaskListItem";
 import AddTaskGroup from "../../Task/components/AddTaskGroup";
-import UpdateCategoryGroup from "../components/UpdateCategoryGroup";
-import useCategories from "../hooks/useCategory";
+import CategoryGroup from "./CategoryGroup";
+import { useQueryClient } from "react-query";
+import useCategories from "../hooks/useCategories";
+import { ICategory } from "../../../intefaces/category";
+import TaskPerCategory from "./TaskPerCatergory";
 
-const CategoryList = () => {
-  const categoryQuery = useCategories();
+const CategoryList = ({ listId }: { listId?: number }) => {
+  const queryClient = useQueryClient();
+  const categories = queryClient.getQueryData<ICategory[]>("categories");
 
   return (
     <div>
-      {categoryQuery.isSuccess && (
-        <div>
-          {categoryQuery.data &&
-            categoryQuery.data.map((category) => {
-              return (
-                <div key={category.id}>
-                  <UpdateCategoryGroup category={category} />
-                  {category.tasks.map((task) => {
-                    return (
-                      <TaskListItem key={task.id} task={task}></TaskListItem>
-                    );
-                  })}
-                  <AddTaskGroup categoryId={category.id}></AddTaskGroup>
-                </div>
-              );
-            })}
-        </div>
-      )}
+      <div>
+        {categories &&
+          categories.map((category) => {
+            return (
+              <div key={category.id}>
+                <TaskPerCategory category={category}></TaskPerCategory>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
