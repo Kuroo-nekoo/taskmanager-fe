@@ -3,6 +3,7 @@ import { ICategory } from "../../../intefaces/category";
 import AddTaskGroup from "../../Task/components/AddTaskGroup";
 import TaskListItem from "../../Task/components/TaskListItem";
 import CategoryGroup from "./CategoryGroup";
+import { IoIosArrowDroprightCircle, IoIosArrowDropdown } from "react-icons/io";
 
 const TaskPerCategory = ({ category }: { category: ICategory }) => {
   const [hideTask, setHideTask] = React.useState(false);
@@ -10,12 +11,22 @@ const TaskPerCategory = ({ category }: { category: ICategory }) => {
   return (
     <div>
       <button
-        className="absolute transform -translate-x-10"
+        className="absolute transform -translate-x-7"
         onClick={() => {
           setHideTask(!hideTask);
         }}
       >
-        {hideTask ? "show" : "hide"}
+        {hideTask ? (
+          <IoIosArrowDroprightCircle
+            className="w-6 h-6"
+            style={{ color: category.color }}
+          ></IoIosArrowDroprightCircle>
+        ) : (
+          <IoIosArrowDropdown
+            className="w-6 h-6"
+            style={{ color: category.color }}
+          ></IoIosArrowDropdown>
+        )}
       </button>
       <CategoryGroup category={category} />
       {category.tasks.map((task) => {

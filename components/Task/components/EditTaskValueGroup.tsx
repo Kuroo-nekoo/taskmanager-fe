@@ -22,6 +22,10 @@ const EditTaskValueGroup = ({
         onChange={(e) => {
           setUpdateTaskValue(e.target.value);
         }}
+        autoFocus
+        onFocus={(e) => {
+          e.target.select();
+        }}
       ></input>
       <div className="ml-auto">
         <button

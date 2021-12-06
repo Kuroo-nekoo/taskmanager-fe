@@ -88,7 +88,7 @@ const Sidebar = () => {
                   {space.lists &&
                     space.lists.map((list) => {
                       return (
-                        <div key={list.value}>
+                        <div className="ml-3" key={list.value}>
                           <div
                             className="inline"
                             onClick={(e) => {

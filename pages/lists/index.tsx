@@ -5,8 +5,6 @@ import Sidebar from "../../components/Sidebar/components/Sidebar";
 import useSpaces, { getSpaces } from "../../components/spaces/hooks/useSpaces";
 
 const List = () => {
-  const spaceQuery = useSpaces();
-
   return (
     <div className="w-screen h-screen grid grid-cols-12">
       <Sidebar></Sidebar>

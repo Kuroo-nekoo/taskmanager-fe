@@ -4,7 +4,6 @@ import { ITask } from "../../../intefaces/task";
 import useDeleteTask from "../hooks/useDeleteTask";
 import * as React from "react";
 import TaskCategoryChanger from "./TaskCategoryChanger";
-import useUpdateTaskValue from "../hooks/useUpdateTaskValue";
 import EditTaskValueGroup from "./EditTaskValueGroup";
 
 const TaskListItem = ({ task }: { task: ITask }) => {
@@ -19,7 +18,7 @@ const TaskListItem = ({ task }: { task: ITask }) => {
   );
 
   return (
-    <div className="border border-gray-400 border-solid h-11 my-0.5 px-3 flex items-center">
+    <div className="border border-gray-400 border-solid my-0.5 py-3 px-5 flex items-center">
       {isEditTaskValue ? (
         <EditTaskValueGroup
           task={task}

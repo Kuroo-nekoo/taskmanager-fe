@@ -4,9 +4,11 @@ import CategoryList from "../../components/Category/components/CategoryList";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import axios from "axios";
 import useCategories from "../../components/Category/hooks/useCategories";
+import useSpaces from "../../components/spaces/hooks/useSpaces";
 
 const List = () => {
   const categoryQuery = useCategories();
+  const spaceQuery = useSpaces();
 
   return (
     <div className="w-screen h-screen grid grid-cols-12">
