@@ -1,10 +1,7 @@
-import TaskListItem from "../../Task/components/TaskListItem";
-import AddTaskGroup from "../../Task/components/AddTaskGroup";
-import CategoryGroup from "./CategoryGroup";
 import { useQueryClient } from "react-query";
-import useCategories from "../hooks/useCategories";
 import { ICategory } from "../../../intefaces/category";
 import TaskPerCategory from "./TaskPerCatergory";
+import { useRouter } from "next/dist/client/router";
 
 const CategoryList = ({ listId }: { listId?: number }) => {
   const queryClient = useQueryClient();
