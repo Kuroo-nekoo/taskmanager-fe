@@ -9,7 +9,7 @@ interface IAddSpaceParams {
 export default function useAddSpace(queryClient: QueryClient) {
   const spaceUrl = "http://localhost:4000/spaces";
 
-  return useMutation<ISpace, Error, number>(
+  return useMutation<ISpace, Error, string>(
     async (id) => {
       try {
         const res = await axios.delete(`${spaceUrl}/${id}`);
