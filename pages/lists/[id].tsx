@@ -1,13 +1,16 @@
 import * as React from "react";
 import Sidebar from "../../components/Sidebar/components/Sidebar";
 import CategoryList from "../../components/Category/components/CategoryList";
-import { dehydrate, QueryClient, useQuery } from "react-query";
+import { dehydrate, QueryClient } from "react-query";
 import axios from "axios";
 import useCategories from "../../components/Category/hooks/useCategories";
 import useSpaces from "../../components/spaces/hooks/useSpaces";
+import { useRouter } from "next/dist/client/router";
+import { GetServerSideProps } from "next";
 
 const List = () => {
-  const categoryQuery = useCategories();
+  const router = useRouter();
+  const categoryQuery = useCategories(Number(router.query.id));
   const spaceQuery = useSpaces();
 
   return (
@@ -22,7 +25,7 @@ const List = () => {
 
 export default List;
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery("categories", async () => {
@@ -48,4 +51,4 @@ export async function getServerSideProps() {
       dehydratedState: dehydrate(queryClient),
     },
   };
-}
+};
