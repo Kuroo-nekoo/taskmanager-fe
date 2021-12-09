@@ -1,7 +1,7 @@
 import { IList } from "./list";
 
 export interface ISpace {
-  id: number;
+  id: string;
   value: string;
   lists: IList[];
 }

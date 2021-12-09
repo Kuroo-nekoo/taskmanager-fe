@@ -1,4 +1,8 @@
+import { ICategory } from "./category";
+
 export interface IList {
-  id: number;
+  spaceId: string;
+  id: string;
   value: string;
+  categories: ICategory[];
 }

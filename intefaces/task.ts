@@ -1,5 +1,5 @@
 export interface ITask {
-  id: number;
+  id: string;
   value: string;
-  categoryId: number;
+  categoryId: string;
 }
