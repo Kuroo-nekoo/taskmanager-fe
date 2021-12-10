@@ -10,7 +10,7 @@ import { GetServerSideProps } from "next";
 
 const List = () => {
   const router = useRouter();
-  const categoryQuery = useCategories(Number(router.query.id));
+  const categoryQuery = useCategories(router.query.id);
   const spaceQuery = useSpaces();
 
   return (

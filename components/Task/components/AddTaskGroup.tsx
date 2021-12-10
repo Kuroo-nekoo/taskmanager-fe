@@ -2,7 +2,7 @@ import * as React from "react";
 import { useQueryClient } from "react-query";
 import useAddTask from "../hooks/useAddTask";
 
-const AddTaskGroup = ({ categoryId }: { categoryId: number }) => {
+const AddTaskGroup = ({ categoryId }: { categoryId: string }) => {
   const addTaskInputRef = React.useRef<HTMLInputElement | null>(null);
   const [isAddTask, setIsAddTask] = React.useState<boolean>(false);
   const queryClient = useQueryClient();

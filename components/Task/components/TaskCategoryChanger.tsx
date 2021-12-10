@@ -7,7 +7,7 @@ const TaskCategoryChanger = ({
   taskId,
   setIsChangeTaskCategory,
 }: {
-  taskId: number;
+  taskId: string;
   setIsChangeTaskCategory: Function;
 }) => {
   const queryClient = useQueryClient();

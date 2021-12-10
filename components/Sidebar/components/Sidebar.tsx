@@ -6,23 +6,23 @@ import useAddSpace from "../../spaces/hooks/useAddSpace";
 import useDeleteSpace from "../../spaces/hooks/useDeleteSpace";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
-import UpdateSpaceGroup from "../../spaces/components/UpdateSpaceGroup";
 import { IoIosMore } from "react-icons/io";
 import SpaceSettingModal from "../../spaces/components/SpaceSettingModal";
 import Modal from "../../Modal/components/Modal";
 import AddListModal from "../../List/components/AddListModal";
 import useDeleteList from "../../List/hooks/useDeleteList";
+import AddSpaceModal from "../../spaces/components/AddSpaceModal";
+import EditSpaceModal from "../../spaces/components/EditSpaceModal";
 
 const Sidebar = () => {
   const queryClient = useQueryClient();
   const spaces = queryClient.getQueryData<ISpace[]>("spaces");
-  const addSpaceInputRef = React.useRef<HTMLInputElement | null>(null);
   const [isOpenSpaceTab, setIsOpenSpaceTab] = React.useState(false);
   const [isAddSpace, setIsAddSpace] = React.useState(false);
   const [isAddList, setIsAddList] = React.useState(false);
   const [isSettingSpace, setIsSettingSpace] = React.useState(false);
+  const [isUpdateSpace, setIsUpdateSpace] = React.useState(false);
 
-  const addSpaceMutation = useAddSpace(queryClient);
   const deleteSpaceMutation = useDeleteSpace(queryClient);
   const deleteListMutation = useDeleteList(queryClient);
 
@@ -46,38 +46,24 @@ const Sidebar = () => {
         )}
       </button>
       <div className="border-gray-200 border-solid border-b">
-        <button
-          className="block bg-gray-100 hover:bg-gray-200 w-full"
-          onClick={() => {
-            setIsAddSpace(!isAddSpace);
-          }}
-        >
-          new space +
-        </button>
-        {isAddSpace && (
-          <div className="block">
-            <input type="text" ref={addSpaceInputRef} />
+        <div className="m-4">
+          {isOpenSpaceTab && (
             <button
-              onClick={() => {
-                if (addSpaceInputRef.current) {
-                  addSpaceMutation.mutate({
-                    value: addSpaceInputRef.current.value,
-                  });
-                }
-              }}
-            >
-              add
-            </button>
-            <button
-              className="ml-3"
+              className="block bg-gray-100 hover:bg-gray-200 w-full rounded-sm"
               onClick={() => {
                 setIsAddSpace(!isAddSpace);
               }}
             >
-              cancel
+              new space +
             </button>
-          </div>
-        )}
+          )}
+          {isAddSpace && (
+            <Modal>
+              <AddSpaceModal setIsAddSpace={setIsAddSpace}></AddSpaceModal>
+            </Modal>
+          )}
+        </div>
+
         {isOpenSpaceTab &&
           spaces &&
           spaces.map((space) => {
@@ -85,11 +71,13 @@ const Sidebar = () => {
               <>
                 <div key={space.id}>
                   <div className="flex justify-between items-center px-4 relative">
-                    {space.value}
+                    <div className="block">{space.value}</div>
                     {isSettingSpace && (
                       <SpaceSettingModal
                         setIsSettingSpace={setIsSettingSpace}
                         setIsAddList={setIsAddList}
+                        setIsUpdateSpace={setIsUpdateSpace}
+                        space={space}
                       ></SpaceSettingModal>
                     )}
                     {isAddList && (
@@ -100,6 +88,14 @@ const Sidebar = () => {
                         ></AddListModal>
                       </Modal>
                     )}
+                    {isUpdateSpace && (
+                      <Modal>
+                        <EditSpaceModal
+                          space={space}
+                          setIsUpdateSpace={setIsUpdateSpace}
+                        ></EditSpaceModal>
+                      </Modal>
+                    )}
                     <button
                       onClick={() => {
                         setIsSettingSpace(!isSettingSpace);
@@ -108,7 +104,6 @@ const Sidebar = () => {
                       <IoIosMore style={{ display: "inline" }}></IoIosMore>
                     </button>
                   </div>
-                  <UpdateSpaceGroup space={space}></UpdateSpaceGroup>
                   <button
                     className="ml-3"
                     onClick={() => {
