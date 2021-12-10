@@ -2,7 +2,7 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { ICategory } from "../../../intefaces/category";
 
-export default function useCategories(listId?: string) {
+export default function useCategories(listId?: string | string[]) {
   const categoryUrl = "http://localhost:4000/categories";
 
   return useQuery("categories", async () => {
