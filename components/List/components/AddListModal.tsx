@@ -14,16 +14,29 @@ export const AddListModal = ({
   const queryClient = useQueryClient();
   const addListInputRef = React.useRef<HTMLInputElement | null>(null);
   const addListMutation = useAddList(queryClient);
+  const wrapperRef = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
+    const detectOutsideClick = (e: MouseEvent) => {
+      console.log(e.target);
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
+        setIsAddList(false);
+      }
+    };
+    document.addEventListener("click", detectOutsideClick);
+
     return () => {
       setIsAddList(false);
+      document.removeEventListener("click", detectOutsideClick);
     };
   }, [setIsAddList]);
 
   return (
-    <div className="flex w-4/12 mx-auto bg-white h-2/6 flex-col rounded-lg">
-      <div className="w-full text-3xl border-b border-gray-200 border-solid p-6 flex justify-between items-center ">
+    <div className="w-4/12 modal" ref={wrapperRef}>
+      <div className="modal-title">
         CREAT LIST
         <button
           onClick={() => {
@@ -33,27 +46,27 @@ export const AddListModal = ({
           <GrClose></GrClose>
         </button>
       </div>
-      <div className="bg-gray-100 h-full rounded-b-lg p-6 flex flex-col">
+      <div className="modal-content">
         <label className="block" htmlFor="addListInput">
           List name:
         </label>
         <input
           id="addListInput"
           type="text"
-          className="border border-gray-300 border-solid h-10"
+          className="modal-content-input"
           ref={addListInputRef}
         ></input>
-        <div className="mt-auto flex">
+        <div className="mt-20 flex">
           <button
             onClick={() => {
               setIsAddList(false);
             }}
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 ml-auto"
+            className="modal-content-button ml-auto"
           >
             cancel
           </button>
           <button
-            className="ml-3 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 "
+            className="modal-content-button ml-3"
             onClick={() => {
               if (addListInputRef.current) {
                 addListMutation.mutate({
