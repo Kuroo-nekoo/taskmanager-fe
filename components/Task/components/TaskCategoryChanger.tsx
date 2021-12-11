@@ -2,6 +2,7 @@ import { useQueryClient } from "react-query";
 import { ICategory } from "../../../intefaces/category";
 import useUpdateTaskCategory from "../hooks/useUpdateTaskCategory";
 import * as React from "react";
+import { IList } from "../../../intefaces/list";
 
 const TaskCategoryChanger = ({
   taskId,
@@ -11,10 +12,9 @@ const TaskCategoryChanger = ({
   setIsChangeTaskCategory: Function;
 }) => {
   const queryClient = useQueryClient();
-  const categories = queryClient.getQueryData<ICategory[]>("categories");
   const updateTaskCategoryMutation = useUpdateTaskCategory(queryClient);
   const wrapperRef = React.useRef<HTMLDivElement | null>(null);
-  console.log(categories);
+  const list = queryClient.getQueryData<IList>("list");
 
   React.useEffect(() => {
     const detectOutsideClick = (e: MouseEvent) => {
@@ -37,8 +37,8 @@ const TaskCategoryChanger = ({
       className="z-50 bg-white border-black border border-solid w-max transform translate-y-4 p-4"
       ref={wrapperRef}
     >
-      {categories &&
-        categories.map((category) => {
+      {list &&
+        list.categories.map((category) => {
           return (
             <div
               className="flex items-center hover:bg-gray-500"

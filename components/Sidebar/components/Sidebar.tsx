@@ -2,8 +2,6 @@ import * as React from "react";
 import { useQueryClient } from "react-query";
 import AddCategoryGroup from "../../Category/components/AddCategoryGroup";
 import { ISpace } from "../../../intefaces/space";
-import useAddSpace from "../../spaces/hooks/useAddSpace";
-import useDeleteSpace from "../../spaces/hooks/useDeleteSpace";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import { IoIosMore } from "react-icons/io";
@@ -23,7 +21,6 @@ const Sidebar = () => {
   const [isSettingSpace, setIsSettingSpace] = React.useState(false);
   const [isUpdateSpace, setIsUpdateSpace] = React.useState(false);
 
-  const deleteSpaceMutation = useDeleteSpace(queryClient);
   const deleteListMutation = useDeleteList(queryClient);
 
   return (
@@ -104,20 +101,12 @@ const Sidebar = () => {
                       <IoIosMore style={{ display: "inline" }}></IoIosMore>
                     </button>
                   </div>
-                  <button
-                    className="ml-3"
-                    onClick={() => {
-                      deleteSpaceMutation.mutate(space.id);
-                    }}
-                  >
-                    delete
-                  </button>
                   {space.lists &&
                     space.lists.map((list) => {
                       return (
-                        <div className="ml-3" key={list.id}>
+                        <div className="hover:bg-gray-200" key={list.id}>
                           <Link href={`/lists/${list.id}`}>
-                            <a>{list.value}</a>
+                            <a className="ml-3">{list.value}</a>
                           </Link>
                           <button
                             className="ml-3"

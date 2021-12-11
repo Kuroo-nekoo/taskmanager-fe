@@ -47,6 +47,7 @@ const AddSpaceModal = ({ setIsAddSpace }: { setIsAddSpace: Function }) => {
           id="addSpaceInput"
           className="border border-gray-300 border-solid h-10"
           ref={addSpaceInputRef}
+          autoFocus
         ></input>
         <div className="flex mt-20">
           <button

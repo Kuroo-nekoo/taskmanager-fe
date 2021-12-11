@@ -36,6 +36,7 @@ const AddCategoryGroup = ({ list }: { list: IList }) => {
           <button
             onClick={() => {
               if (addCategoryValueInputRef.current) {
+                console.log(categoryColor);
                 addCategoryMutation.mutate({
                   value: addCategoryValueInputRef.current.value,
                   color: categoryColor,

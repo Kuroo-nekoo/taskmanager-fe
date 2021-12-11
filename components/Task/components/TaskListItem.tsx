@@ -5,20 +5,27 @@ import useDeleteTask from "../hooks/useDeleteTask";
 import * as React from "react";
 import TaskCategoryChanger from "./TaskCategoryChanger";
 import EditTaskValueGroup from "./EditTaskValueGroup";
+import { IList } from "../../../intefaces/list";
 
-const TaskListItem = ({ task }: { task: ITask }) => {
+const TaskListItem = ({
+  task,
+  searchTasksValue,
+}: {
+  task: ITask;
+  searchTasksValue: string;
+}) => {
   const queryClient = useQueryClient();
   const [isChangeTaskCategory, setIsChangeTaskCategory] = React.useState(false);
   const [isEditTaskValue, setIsEditTaskValue] = React.useState(false);
 
   const deleteTaskMutation = useDeleteTask(queryClient);
-  const categories = queryClient.getQueryData<ICategory[]>("categories");
-  const category = categories?.find(
+  const list = queryClient.getQueryData<IList>("list");
+  const category = list?.categories.find(
     (category) => category.id === task.categoryId
   );
 
   return (
-    <div className="border border-gray-400 border-solid my-0.5 py-3 px-5 flex items-center hover:bg-gray-100">
+    <div className="border border-gray-300 border-solid my-0.5 flex items-center hover:bg-gray-100">
       {isEditTaskValue ? (
         <EditTaskValueGroup
           task={task}
@@ -27,7 +34,7 @@ const TaskListItem = ({ task }: { task: ITask }) => {
       ) : (
         <>
           <div
-            className="w-2 h-2 mr-3"
+            className="w-2 h-2 m-3"
             style={{ background: category && category.color }}
             onClick={() => {
               setIsChangeTaskCategory(!isChangeTaskCategory);
@@ -40,7 +47,11 @@ const TaskListItem = ({ task }: { task: ITask }) => {
               ></TaskCategoryChanger>
             )}
           </div>
-          <div>{task.value}</div>
+          <div>
+            {(searchTasksValue.length === 0 ||
+              task.value.includes(searchTasksValue)) &&
+              task.value}
+          </div>
           {isEditTaskValue ? (
             <div className="ml-auto">
               <button>save</button>
@@ -52,7 +63,7 @@ const TaskListItem = ({ task }: { task: ITask }) => {
               </button>
             </div>
           ) : (
-            <div className="ml-auto">
+            <div className="ml-auto mr-3">
               <button onClick={() => setIsEditTaskValue(true)}>edit</button>
               <button
                 className="ml-2"

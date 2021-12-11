@@ -39,7 +39,12 @@ const AddTaskGroup = ({ categoryId }: { categoryId: string }) => {
           </button>
         </div>
       ) : (
-        <button onClick={() => setIsAddTask(!isAddTask)}>new task +</button>
+        <button
+          className="text-sm mb-4"
+          onClick={() => setIsAddTask(!isAddTask)}
+        >
+          new task +
+        </button>
       )}
     </div>
   );

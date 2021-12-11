@@ -55,6 +55,7 @@ export const AddListModal = ({
           type="text"
           className="modal-content-input"
           ref={addListInputRef}
+          autoFocus
         ></input>
         <div className="mt-20 flex">
           <button
