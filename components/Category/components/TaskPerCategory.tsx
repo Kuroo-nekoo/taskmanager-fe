@@ -5,7 +5,13 @@ import TaskListItem from "../../Task/components/TaskListItem";
 import CategoryGroup from "./CategoryGroup";
 import { IoIosArrowDroprightCircle, IoIosArrowDropdown } from "react-icons/io";
 
-const TaskPerCategory = ({ category }: { category: ICategory }) => {
+const TaskPerCategory = ({
+  category,
+  searchTasksValue,
+}: {
+  category: ICategory;
+  searchTasksValue: string;
+}) => {
   const [hideTask, setHideTask] = React.useState(false);
 
   return (
@@ -33,7 +39,11 @@ const TaskPerCategory = ({ category }: { category: ICategory }) => {
         return (
           <React.Fragment key={task.id}>
             {hideTask ? null : (
-              <TaskListItem key={task.id} task={task}></TaskListItem>
+              <TaskListItem
+                searchTasksValue={searchTasksValue}
+                key={task.id}
+                task={task}
+              ></TaskListItem>
             )}
           </React.Fragment>
         );
