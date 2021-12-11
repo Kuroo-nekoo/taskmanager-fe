@@ -46,7 +46,7 @@ export default function useUpdateCategory(queryClient: QueryClient) {
       // },
 
       onSettled: () => {
-        queryClient.invalidateQueries("categories");
+        queryClient.invalidateQueries("spaces");
       },
     }
   );

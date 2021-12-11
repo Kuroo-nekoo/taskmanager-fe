@@ -17,7 +17,7 @@ export default function useDeleteCategory(queryClient: QueryClient) {
 
     {
       onSettled: () => {
-        queryClient.invalidateQueries("categories");
+        queryClient.invalidateQueries("spaces");
       },
     }
   );

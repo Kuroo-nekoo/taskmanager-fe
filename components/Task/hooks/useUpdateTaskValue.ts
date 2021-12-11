@@ -17,7 +17,7 @@ export default function useUpdateTaskValue(queryClient: QueryClient) {
     },
     {
       onSettled: () => {
-        queryClient.invalidateQueries("categories");
+        queryClient.invalidateQueries("spaces");
       },
     }
   );
