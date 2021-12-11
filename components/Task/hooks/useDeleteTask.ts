@@ -31,7 +31,7 @@ export default function useDeleteTask(queryClient: QueryClient) {
       //   }
       // },
       onSettled: () => {
-        queryClient.invalidateQueries("spaces");
+        queryClient.invalidateQueries("list");
       },
     }
   );

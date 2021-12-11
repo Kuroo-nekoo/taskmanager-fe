@@ -33,7 +33,7 @@ export default function useAddCategory(queryClient: QueryClient) {
       // },
 
       onSettled: () => {
-        queryClient.invalidateQueries("spaces");
+        queryClient.invalidateQueries("list");
       },
     }
   );

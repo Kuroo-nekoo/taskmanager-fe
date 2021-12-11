@@ -3,18 +3,16 @@ import { useQuery } from "react-query";
 import { ICategory } from "../../../intefaces/category";
 
 export default function useCategories(listId?: string | string[]) {
+  return useQuery("categories", getCategories);
+}
+
+export const getCategories = async () => {
   const categoryUrl = "http://localhost:4000/categories";
 
-  return useQuery("categories", async () => {
-    try {
-      const res = await axios.get<ICategory[]>(categoryUrl);
-      if (listId) {
-        return res.data.filter((category) => category.listId === listId);
-      } else {
-        return res.data;
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  });
-}
+  try {
+    const res = await axios.get<ICategory[]>(categoryUrl);
+    return res.data;
+  } catch (err) {
+    console.error(err);
+  }
+};

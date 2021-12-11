@@ -16,7 +16,7 @@ export default function useUpdateTaskCategory(queryClient: QueryClient) {
     },
     {
       onSettled: () => {
-        queryClient.invalidateQueries("spaces");
+        queryClient.invalidateQueries("list");
       },
     }
   );
