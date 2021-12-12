@@ -108,14 +108,6 @@ const Sidebar = () => {
                           <Link href={`/lists/${list.id}`}>
                             <a className="ml-3">{list.value}</a>
                           </Link>
-                          <button
-                            className="ml-3"
-                            onClick={() => {
-                              deleteListMutation.mutate(list.id);
-                            }}
-                          >
-                            delete
-                          </button>
                           <AddCategoryGroup list={list}></AddCategoryGroup>
                         </div>
                       );

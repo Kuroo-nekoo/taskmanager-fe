@@ -34,14 +34,14 @@ const TaskCategoryChanger = ({
 
   return (
     <div
-      className="z-50 bg-white border-black border border-solid w-max transform translate-y-4 p-4"
+      className="z-50 bg-white border-black border border-solid w-max transform -translate-y-2 translate-x-3 p-3"
       ref={wrapperRef}
     >
       {list &&
         list.categories.map((category) => {
           return (
             <div
-              className="flex items-center hover:bg-gray-500"
+              className="flex items-center hover:bg-gray-300 min-h-max rounded-md"
               key={category.id}
               onClick={() => {
                 updateTaskCategoryMutation.mutate({
@@ -51,10 +51,10 @@ const TaskCategoryChanger = ({
               }}
             >
               <div
-                className="w-2 h-2"
+                className="w-2 h-2 m-3"
                 style={{ background: category.color }}
               ></div>
-              <div>{category.value}</div>
+              <div className="p-1 pr-12">{category.value}</div>
             </div>
           );
         })}
