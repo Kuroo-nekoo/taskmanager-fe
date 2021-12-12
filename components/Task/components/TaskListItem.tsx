@@ -10,12 +10,13 @@ import { IList } from "../../../intefaces/list";
 const TaskListItem = ({
   task,
   searchTasksValue,
+  setIsChangeTaskCategory,
 }: {
   task: ITask;
   searchTasksValue: string;
+  setIsChangeTaskCategory: Function;
 }) => {
   const queryClient = useQueryClient();
-  const [isChangeTaskCategory, setIsChangeTaskCategory] = React.useState(false);
   const [isEditTaskValue, setIsEditTaskValue] = React.useState(false);
 
   const deleteTaskMutation = useDeleteTask(queryClient);
@@ -37,16 +38,9 @@ const TaskListItem = ({
             className="w-2 h-2 m-3"
             style={{ background: category && category.color }}
             onClick={() => {
-              setIsChangeTaskCategory(!isChangeTaskCategory);
+              setIsChangeTaskCategory(true);
             }}
-          >
-            {isChangeTaskCategory && (
-              <TaskCategoryChanger
-                taskId={task.id}
-                setIsChangeTaskCategory={setIsChangeTaskCategory}
-              ></TaskCategoryChanger>
-            )}
-          </div>
+          ></div>
           <div>
             {(searchTasksValue.length === 0 ||
               task.value.includes(searchTasksValue)) &&

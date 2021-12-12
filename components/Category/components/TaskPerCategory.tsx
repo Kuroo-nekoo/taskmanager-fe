@@ -4,6 +4,7 @@ import AddTaskGroup from "../../Task/components/AddTaskGroup";
 import TaskListItem from "../../Task/components/TaskListItem";
 import CategoryGroup from "./CategoryGroup";
 import { IoIosArrowDroprightCircle, IoIosArrowDropdown } from "react-icons/io";
+import TaskCategoryChanger from "../../Task/components/TaskCategoryChanger";
 
 const TaskPerCategory = ({
   category,
@@ -13,6 +14,7 @@ const TaskPerCategory = ({
   searchTasksValue: string;
 }) => {
   const [hideTask, setHideTask] = React.useState(false);
+  const [isChangeTaskCategory, setIsChangeTaskCategory] = React.useState(false);
 
   return (
     <div>
@@ -39,11 +41,20 @@ const TaskPerCategory = ({
         return (
           <React.Fragment key={task.id}>
             {hideTask ? null : (
-              <TaskListItem
-                searchTasksValue={searchTasksValue}
-                key={task.id}
-                task={task}
-              ></TaskListItem>
+              <>
+                <TaskListItem
+                  searchTasksValue={searchTasksValue}
+                  key={task.id}
+                  task={task}
+                  setIsChangeTaskCategory={setIsChangeTaskCategory}
+                ></TaskListItem>
+                {isChangeTaskCategory && (
+                  <TaskCategoryChanger
+                    taskId={task.id}
+                    setIsChangeTaskCategory={setIsChangeTaskCategory}
+                  ></TaskCategoryChanger>
+                )}
+              </>
             )}
           </React.Fragment>
         );
