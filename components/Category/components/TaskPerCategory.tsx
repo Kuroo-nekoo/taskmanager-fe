@@ -14,7 +14,6 @@ const TaskPerCategory = ({
   searchTasksValue: string;
 }) => {
   const [hideTask, setHideTask] = React.useState(false);
-  const [isChangeTaskCategory, setIsChangeTaskCategory] = React.useState(false);
 
   return (
     <div>
@@ -46,14 +45,7 @@ const TaskPerCategory = ({
                   searchTasksValue={searchTasksValue}
                   key={task.id}
                   task={task}
-                  setIsChangeTaskCategory={setIsChangeTaskCategory}
                 ></TaskListItem>
-                {isChangeTaskCategory && (
-                  <TaskCategoryChanger
-                    taskId={task.id}
-                    setIsChangeTaskCategory={setIsChangeTaskCategory}
-                  ></TaskCategoryChanger>
-                )}
               </>
             )}
           </React.Fragment>
