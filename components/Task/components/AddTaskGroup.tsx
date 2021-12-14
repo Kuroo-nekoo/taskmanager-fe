@@ -12,7 +12,7 @@ const AddTaskGroup = ({ categoryId }: { categoryId: string }) => {
   return (
     <div className="block">
       {isAddTask ? (
-        <div className="w-full border border-black border-solid h-11 my-0.5 px-3 flex items-center">
+        <div className="w-full border border-black border-solid my-0.5 px-3 flex items-center h-8">
           <input
             type="text"
             placeholder="enter task value here"

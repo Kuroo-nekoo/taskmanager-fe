@@ -34,7 +34,7 @@ const TaskCategoryChanger = ({
 
   return (
     <div
-      className="z-50 bg-white border-black border border-solid w-max transform -translate-y-2 translate-x-3 p-3"
+      className="z-50 bg-white border-black border border-solid w-max transform translate-x-3 -translate-y-3 p-3 absolute"
       ref={wrapperRef}
     >
       {list &&

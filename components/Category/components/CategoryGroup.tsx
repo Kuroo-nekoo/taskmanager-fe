@@ -26,7 +26,7 @@ const CategoryGroup = ({ category }: { category: ICategory }) => {
   return (
     <>
       <div
-        className="inline-block border-2 border-solid px-2 py mr-3"
+        className="inline-block border-2 border-solid px-2 py mr-3 text-sm h-6"
         style={{
           background: isUpdateCategory ? "" : category.color,
           borderColor: category.color,
@@ -64,10 +64,10 @@ const CategoryGroup = ({ category }: { category: ICategory }) => {
             </button>
           </>
         ) : (
-          <>
+          <div className="flex">
             <div className="inline-block">{category.value}</div>
             <button
-              className="ml-3 "
+              className="ml-3 vertical-center"
               onClick={() => {
                 setIsUpdateCategory(!isUpdateCategory);
               }}
@@ -75,12 +75,12 @@ const CategoryGroup = ({ category }: { category: ICategory }) => {
               <FiEdit2 style={{ display: "inline" }}></FiEdit2>
             </button>
             <button
-              className="ml-3"
+              className="ml-3 vertical-center"
               onClick={() => deleteCategoryMutation.mutate(category.id)}
             >
               <RiDeleteBinLine style={{ display: "inline" }}></RiDeleteBinLine>
             </button>
-          </>
+          </div>
         )}
         {isUpdateCategory && (
           <div className="absolute">
@@ -93,12 +93,14 @@ const CategoryGroup = ({ category }: { category: ICategory }) => {
           </div>
         )}
       </div>
-      {category.tasks.length !== 0 && (
-        <>
-          {category.tasks.length}{" "}
-          {category.tasks.length === 1 ? "task" : "tasks"}
-        </>
-      )}
+      <div className="text-sm inline">
+        {category.tasks.length !== 0 && (
+          <>
+            {category.tasks.length}{" "}
+            {category.tasks.length === 1 ? "task" : "tasks"}
+          </>
+        )}
+      </div>
     </>
   );
 };

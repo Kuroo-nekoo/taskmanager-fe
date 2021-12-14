@@ -5,7 +5,7 @@ import useAddTask from "../hooks/useAddTask";
 import { IList } from "../../../intefaces/list";
 import { RiArrowDownSFill } from "react-icons/ri";
 
-export const AddListModal = ({ setIsAddTask }: { setIsAddTask: Function }) => {
+export const AddTaskModal = ({ setIsAddTask }: { setIsAddTask: Function }) => {
   const queryClient = useQueryClient();
   const addTaskInputRef = React.useRef<HTMLInputElement | null>(null);
   const list = queryClient.getQueryData<IList>("list");
@@ -62,7 +62,7 @@ export const AddListModal = ({ setIsAddTask }: { setIsAddTask: Function }) => {
                 setIsSelectCategory(!isSelectCategory);
               }}
             >
-              <div className="flex items-center">
+              <div className="modal-content-select">
                 <div
                   className="w-2 h-2 m-3"
                   style={{ background: category && category.color }}
@@ -78,12 +78,12 @@ export const AddListModal = ({ setIsAddTask }: { setIsAddTask: Function }) => {
               </div>
             </button>
             {isSelectCategory && (
-              <div className="absolute bg-white z-50 border border-gray-100 border-solid transform w-full translate-y-14">
+              <div className="absolute bg-white z-50 border border-gray-100 border-solid transform w-full translate-y-11">
                 {list &&
                   list.categories.map((category) => {
                     return (
                       <button
-                        className="flex items-center "
+                        className="flex items-center modal-content-select w-full"
                         key={category.id}
                         onClick={() => {
                           setCategory(category);
@@ -134,4 +134,4 @@ export const AddListModal = ({ setIsAddTask }: { setIsAddTask: Function }) => {
   );
 };
 
-export default AddListModal;
+export default AddTaskModal;
