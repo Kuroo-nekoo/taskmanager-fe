@@ -4,7 +4,7 @@ import { GrClose } from "react-icons/gr";
 import useEditList from "../hooks/useEditList";
 import { IList } from "../../../intefaces/list";
 
-export const AddListModal = ({
+export const EditListModal = ({
   setIsEditList,
   list,
 }: {
@@ -88,4 +88,4 @@ export const AddListModal = ({
   );
 };
 
-export default AddListModal;
+export default EditListModal;

@@ -18,7 +18,6 @@ export const AddListModal = ({
 
   React.useEffect(() => {
     const detectOutsideClick = (e: MouseEvent) => {
-      console.log(e.target);
       if (
         wrapperRef.current &&
         !wrapperRef.current.contains(e.target as Node)
