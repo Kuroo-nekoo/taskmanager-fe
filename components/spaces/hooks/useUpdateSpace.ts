@@ -1,5 +1,4 @@
 import { ISpace } from "./../../../intefaces/space";
-import { ICategory } from "./../../../intefaces/category";
 import axios from "axios";
 import { QueryClient, useMutation } from "react-query";
 

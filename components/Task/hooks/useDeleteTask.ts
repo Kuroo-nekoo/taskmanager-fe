@@ -15,21 +15,6 @@ export default function useDeleteTask(queryClient: QueryClient) {
       }
     },
     {
-      // onMutate: async (id: number) => {
-      //   await queryClient.cancelQueries("tasks");
-      //   const prevTask = queryClient.getQueryData<ITask[]>("tasks");
-      //   if (prevTask) {
-      //     queryClient.setQueryData(
-      //       "tasks",
-      //       prevTask.filter((t) => t.id !== id)
-      //     );
-      //   }
-      // },
-      // onError: (err, variables, context: { prevTask: ITask[] }) => {
-      //   if (context?.prevTask) {
-      //     queryClient.setQueryData("tasks", context.prevTask);
-      //   }
-      // },
       onSettled: () => {
         queryClient.invalidateQueries("categories");
       },

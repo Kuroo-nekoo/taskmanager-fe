@@ -2,12 +2,9 @@ import * as React from "react";
 import Sidebar from "../../components/Sidebar/components/Sidebar";
 import CategoryList from "../../components/Category/components/CategoryList";
 import { dehydrate, QueryClient } from "react-query";
-import axios from "axios";
-import useCategories from "../../components/Category/hooks/useCategories";
 import useSpaces, { getSpaces } from "../../components/spaces/hooks/useSpaces";
 import { useRouter } from "next/dist/client/router";
 import { GetServerSideProps } from "next";
-import { getCategories } from "../../components/Category/hooks/useCategories";
 import useList, { getList } from "../../components/List/hooks/useList";
 
 const List = () => {

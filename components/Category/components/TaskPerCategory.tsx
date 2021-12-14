@@ -4,7 +4,6 @@ import AddTaskGroup from "../../Task/components/AddTaskGroup";
 import TaskListItem from "../../Task/components/TaskListItem";
 import CategoryGroup from "./CategoryGroup";
 import { IoIosArrowDroprightCircle, IoIosArrowDropdown } from "react-icons/io";
-import TaskCategoryChanger from "../../Task/components/TaskCategoryChanger";
 
 const TaskPerCategory = ({
   category,

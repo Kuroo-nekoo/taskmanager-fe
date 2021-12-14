@@ -1,5 +1,5 @@
 import axios from "axios";
-import { QueryClient, useQuery } from "react-query";
+import { useQuery } from "react-query";
 
 export default function useList(listId: string) {
   return useQuery("list", getList(listId));

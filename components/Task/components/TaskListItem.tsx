@@ -1,5 +1,4 @@
 import { useQueryClient } from "react-query";
-import { ICategory } from "../../../intefaces/category";
 import { ITask } from "../../../intefaces/task";
 import useDeleteTask from "../hooks/useDeleteTask";
 import * as React from "react";

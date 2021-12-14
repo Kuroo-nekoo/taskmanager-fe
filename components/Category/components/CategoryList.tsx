@@ -1,5 +1,4 @@
 import { useQueryClient } from "react-query";
-import { ICategory } from "../../../intefaces/category";
 import * as React from "react";
 import { IList } from "../../../intefaces/list";
 import { IoMdSearch } from "react-icons/io";

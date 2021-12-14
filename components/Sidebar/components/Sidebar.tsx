@@ -1,11 +1,7 @@
 import * as React from "react";
 import { useQueryClient } from "react-query";
-import AddCategoryGroup from "../../Category/components/AddCategoryGroup";
 import { ISpace } from "../../../intefaces/space";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
-import Link from "next/link";
-import { IoIosMore } from "react-icons/io";
-import SpaceSettingModal from "../../spaces/components/SpaceSettingModal";
 import Modal from "../../Modal/components/Modal";
 import useDeleteList from "../../List/hooks/useDeleteList";
 import AddSpaceModal from "../../spaces/components/AddSpaceModal";
