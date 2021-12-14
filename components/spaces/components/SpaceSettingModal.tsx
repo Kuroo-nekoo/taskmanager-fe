@@ -1,16 +1,18 @@
-import { AiOutlinePlus } from "react-icons/ai";
 import * as React from "react";
 import { ISpace } from "../../../intefaces/space";
 import useDeleteSpace from "../hooks/useDeleteSpace";
 import { useQueryClient } from "react-query";
+import { FiEdit2 } from "react-icons/fi";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { AiOutlinePlus } from "react-icons/ai";
 
 const SpaceSettingModal = ({
-  setIsSettingSpace,
+  setIsOpenSpaceSetting,
   setIsAddList,
   setIsUpdateSpace,
   space,
 }: {
-  setIsSettingSpace: Function;
+  setIsOpenSpaceSetting: Function;
   setIsAddList: Function;
   setIsUpdateSpace: Function;
   space: ISpace;
@@ -25,7 +27,7 @@ const SpaceSettingModal = ({
         spaceSettingModalWrapperRef.current &&
         !spaceSettingModalWrapperRef.current.contains(e.target as Node)
       ) {
-        setIsSettingSpace(false);
+        setIsOpenSpaceSetting(false);
       }
     };
     document.addEventListener("click", detectOutsideClick);
@@ -33,36 +35,51 @@ const SpaceSettingModal = ({
     return () => {
       document.removeEventListener("click", detectOutsideClick);
     };
-  }, [setIsSettingSpace]);
+  }, [setIsOpenSpaceSetting]);
 
   return (
     <div
-      className="absolute top-0 right-0 border-gray-300 border-solid border transform translate-x-24 translate-y-10 bg-white z-10 rounded"
+      className="absolute top-0 right-0 border-solid border transform translate-x-24 translate-y-10 bg-white z-10 rounded border-gray-300 p-3"
       ref={spaceSettingModalWrapperRef}
     >
-      <div>SPACE SETTINGS</div>
-      <button
-        onClick={() => {
-          setIsUpdateSpace(true);
-        }}
-        className="block"
-      >
-        rename
-      </button>
+      <div className="flex items-center justify-center">
+        <div>SPACE SETTINGS</div>
+        <button
+          className="p-auto flex items-center"
+          onClick={() => {
+            setIsUpdateSpace(true);
+          }}
+        >
+          <FiEdit2
+            style={{
+              display: "inline",
+              marginLeft: "12px",
+            }}
+          ></FiEdit2>
+        </button>
+      </div>
       <button
         onClick={() => {
           setIsAddList(true);
-          setIsSettingSpace(false);
+          setIsOpenSpaceSetting(false);
         }}
-        className="block"
+        className="flex items-center"
       >
-        <AiOutlinePlus style={{ display: "inline" }}></AiOutlinePlus> New List
+        <AiOutlinePlus
+          style={{ display: "inline", marginRight: "12px" }}
+        ></AiOutlinePlus>{" "}
+        new list
       </button>
       <button
         onClick={() => {
           deleteSpaceMutation.mutate(space.id);
         }}
+        className="flex items-center "
+        style={{ color: "#f498be" }}
       >
+        <RiDeleteBinLine
+          style={{ display: "inline", marginRight: "12px" }}
+        ></RiDeleteBinLine>
         delete
       </button>
     </div>
