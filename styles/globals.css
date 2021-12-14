@@ -45,4 +45,16 @@ a {
   .modal-content-button {
     @apply bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4;
   }
+
+  .modal-content-select {
+    @apply modal-content-input flex items-center px-3 bg-white;
+  }
+
+  .horizontal-center {
+    @apply flex justify-center;
+  }
+
+  .vertical-center {
+    @apply flex items-center;
+  }
 }
