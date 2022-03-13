@@ -1,5 +1,4 @@
 import { useQueryClient } from "react-query";
-import { ICategory } from "../../../intefaces/category";
 import useUpdateTaskCategory from "../hooks/useUpdateTaskCategory";
 import * as React from "react";
 import { IList } from "../../../intefaces/list";
@@ -34,7 +33,7 @@ const TaskCategoryChanger = ({
 
   return (
     <div
-      className="z-50 bg-white border-black border border-solid w-max transform translate-x-3 -translate-y-3 p-3 absolute"
+      className="z-50 bg-white w-max transform translate-x-3 -translate-y-3 p-3 absolute shadow-lg shadow-black"
       ref={wrapperRef}
     >
       {list &&

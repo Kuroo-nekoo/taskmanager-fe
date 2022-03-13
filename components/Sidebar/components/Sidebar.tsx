@@ -2,10 +2,10 @@ import * as React from "react";
 import { useQueryClient } from "react-query";
 import { ISpace } from "../../../intefaces/space";
 import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
-import Modal from "../../Modal/components/Modal";
 import useDeleteList from "../../List/hooks/useDeleteList";
 import AddSpaceModal from "../../spaces/components/AddSpaceModal";
 import SpaceListItem from "../../spaces/components/SpaceListItem";
+import Modal from "../../Modal/components/Modal";
 
 const Sidebar = () => {
   const queryClient = useQueryClient();
@@ -52,7 +52,6 @@ const Sidebar = () => {
                 </Modal>
               )}
             </div>
-
             {isOpenSpaceTab &&
               spaces &&
               spaces.map((space) => {

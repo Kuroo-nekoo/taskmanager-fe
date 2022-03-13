@@ -49,6 +49,7 @@ const SpaceListItem = ({ space }: { space: ISpace }) => {
               }}
             >
               <IoIosMore
+                className=""
                 style={{ display: "inline", marginRight: "12px" }}
               ></IoIosMore>
             </button>
@@ -56,7 +57,7 @@ const SpaceListItem = ({ space }: { space: ISpace }) => {
           {space.lists &&
             space.lists.map((list) => {
               return (
-                <div className="hover:bg-gray-200" key={list.id}>
+                <div className="hover:bg-gray-200 py-1" key={list.id}>
                   <Link href={`/lists/${list.id}`}>
                     <a className="px-6">{list.value}</a>
                   </Link>

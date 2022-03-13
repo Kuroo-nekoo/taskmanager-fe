@@ -42,6 +42,7 @@ const AddCategoryGroup = ({ list }: { list: IList }) => {
                   color: categoryColor,
                   listId: list.id,
                 });
+                setIsAddCategory(false);
               }
             }}
           >

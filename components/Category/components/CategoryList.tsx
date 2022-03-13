@@ -22,75 +22,79 @@ const CategoryList = () => {
   const [isCopyList, setIsCopyList] = React.useState(false);
 
   return (
-    <div className="relative col-span-10">
+    <div className="relative col-span-10" style={{ background: "#fafbfc" }}>
       {list && (
         <>
-          <button
-            className="relative m-3"
-            onClick={() => {
-              setIsOpenListSetting(!isOpenListSetting);
-            }}
-          >
-            {list.value}
-            <div className="ml-1 inline vertical-center">
-              {isOpenListSetting ? (
-                <IoMdArrowDropup
-                  style={{ display: "inline" }}
-                ></IoMdArrowDropup>
-              ) : (
-                <IoMdArrowDropdown
-                  style={{ display: "inline" }}
-                ></IoMdArrowDropdown>
-              )}
+          <div className="bg-white">
+            <div>
+              <button
+                className="relative m-3 "
+                onClick={() => {
+                  setIsOpenListSetting(!isOpenListSetting);
+                }}
+              >
+                {list.value}
+                <div className="ml-1 inline vertical-center">
+                  {isOpenListSetting ? (
+                    <IoMdArrowDropup
+                      style={{ display: "inline" }}
+                    ></IoMdArrowDropup>
+                  ) : (
+                    <IoMdArrowDropdown
+                      style={{ display: "inline" }}
+                    ></IoMdArrowDropdown>
+                  )}
+                </div>
+              </button>
             </div>
-          </button>
-          {isEditList && (
-            <Modal>
-              <EditListModal
-                list={list}
+            {isEditList && (
+              <Modal>
+                <EditListModal
+                  list={list}
+                  setIsEditList={setIsEditList}
+                ></EditListModal>
+              </Modal>
+            )}
+            {isAddTask && (
+              <Modal>
+                <AddTaskModal setIsAddTask={setIsAddTask}></AddTaskModal>
+              </Modal>
+            )}
+            {isOpenListSetting && (
+              <ListSettingModal
                 setIsEditList={setIsEditList}
-              ></EditListModal>
-            </Modal>
-          )}
-          {isAddTask && (
-            <Modal>
-              <AddTaskModal setIsAddTask={setIsAddTask}></AddTaskModal>
-            </Modal>
-          )}
-          {isOpenListSetting && (
-            <ListSettingModal
-              setIsEditList={setIsEditList}
-              setIsAddTask={setIsAddTask}
-              setIsMoveList={setIsMoveList}
-              setIsOpenListSetting={setIsOpenListSetting}
-              setIsCopyList={setIsCopyList}
-            ></ListSettingModal>
-          )}
-          {isMoveList && (
-            <Modal>
-              <MoveListModal
+                setIsAddTask={setIsAddTask}
                 setIsMoveList={setIsMoveList}
-                list={list}
-              ></MoveListModal>
-            </Modal>
-          )}
-          {isCopyList && (
-            <Modal>
-              <CopyListModal
-                list={list}
+                setIsOpenListSetting={setIsOpenListSetting}
                 setIsCopyList={setIsCopyList}
-              ></CopyListModal>
-            </Modal>
-          )}
-          <div className="border border-b border-gray-300">
-            <IoMdSearch style={{ display: "inline" }}></IoMdSearch>
-            <input
-              className="ml-2"
-              onChange={(e) => {
-                setSearchTasksValue(e.target.value);
-              }}
-              placeholder="search tasks"
-            ></input>
+              ></ListSettingModal>
+            )}
+            {isMoveList && (
+              <Modal>
+                <MoveListModal
+                  setIsMoveList={setIsMoveList}
+                  list={list}
+                ></MoveListModal>
+              </Modal>
+            )}
+            {isCopyList && (
+              <Modal>
+                <CopyListModal
+                  list={list}
+                  setIsCopyList={setIsCopyList}
+                ></CopyListModal>
+              </Modal>
+            )}
+            <div className="border border-b border-gray-300">
+              <IoMdSearch style={{ display: "inline" }}></IoMdSearch>
+              <input
+                className="ml-2"
+                onChange={(e) => {
+                  setSearchTasksValue(e.target.value);
+                }}
+                placeholder="search tasks"
+              ></input>
+            </div>
           </div>
           <div className="px-16 py-16 w-full ">
             <div>

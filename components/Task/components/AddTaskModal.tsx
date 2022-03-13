@@ -67,7 +67,7 @@ export const AddTaskModal = ({ setIsAddTask }: { setIsAddTask: Function }) => {
                   className="w-2 h-2 m-3"
                   style={{ background: category && category.color }}
                 ></div>
-                {category && category.value}
+                <div className="truncate">{category && category.value}</div>
                 <RiArrowDownSFill
                   style={{
                     display: "inline",

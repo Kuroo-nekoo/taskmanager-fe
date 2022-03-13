@@ -20,6 +20,7 @@ const AddTaskGroup = ({ categoryId }: { categoryId: string }) => {
             autoFocus
           ></input>
           <button
+            className="ml-auto"
             onClick={() => {
               if (
                 addTaskInputRef.current &&
@@ -34,7 +35,7 @@ const AddTaskGroup = ({ categoryId }: { categoryId: string }) => {
           >
             add
           </button>
-          <button className="ml-auto" onClick={() => setIsAddTask(!isAddTask)}>
+          <button className="ml-2" onClick={() => setIsAddTask(!isAddTask)}>
             cancel
           </button>
         </div>

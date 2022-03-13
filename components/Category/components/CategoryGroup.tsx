@@ -26,7 +26,7 @@ const CategoryGroup = ({ category }: { category: ICategory }) => {
   return (
     <>
       <div
-        className="inline-block border-2 border-solid px-2 py mr-3 text-sm h-6"
+        className="inline-block border-2 border-solid px-2 py mr-3 text-sm h-6 rounded-t"
         style={{
           background: isUpdateCategory ? "" : category.color,
           borderColor: category.color,

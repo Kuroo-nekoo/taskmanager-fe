@@ -11,7 +11,6 @@ const AddSpaceModal = ({ setIsAddSpace }: { setIsAddSpace: Function }) => {
 
   React.useEffect(() => {
     const detectOutsideClick = (e: MouseEvent) => {
-      console.log(e.target);
       if (
         wrapperRef.current &&
         !wrapperRef.current.contains(e.target as Node)
